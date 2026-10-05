@@ -1,0 +1,246 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mecânica da Fita ENIAC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root{
+    --paper:#fbf7f0; --ink:#2a2016; --soft:#7a6a52; --line:#e4d8c3;
+    --amber:#c9731a; --amber-deep:#9a5212; --amber-wash:#f6ebd8;
+    --steel:#7b8794; --steel-dark:#4b5560; --rubber:#2f2b26; --tape:#efe6d4; --tape-edge:#caa96f;
+    color-scheme:light;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#ded3c0; color:var(--ink);
+    font-family:"Figtree",system-ui,sans-serif; padding:16px; line-height:1.5; }
+  .wrap{ max-width:900px; margin:0 auto; }
+  header{ background:linear-gradient(120deg,#2a2016,#4b3620); color:#f3e9db;
+    border-radius:16px; padding:18px 20px; }
+  header .k{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--amber); }
+  header h1{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; margin:4px 0 4px;
+    font-size:24px; line-height:1.03; }
+  header p{ margin:0; color:#e0d2bc; font-size:13.5px; }
+  .card{ background:var(--paper); border:1px solid var(--line); border-radius:14px;
+    padding:16px 18px; margin-top:14px; box-shadow:0 10px 30px rgba(60,40,10,.08); }
+  h2{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; color:var(--amber-deep);
+    font-size:16px; margin:0 0 4px; display:flex; align-items:center; gap:8px; }
+  h2 .n{ font-family:"Space Mono",monospace; font-size:12px; background:var(--amber); color:#fff;
+    width:24px; height:24px; border-radius:7px; display:grid; place-items:center; flex:none; }
+  p{ margin:6px 0; font-size:14px; } .soft{ color:var(--soft); font-size:13px; }
+  strong{ color:var(--amber-deep); }
+  figure{ margin:10px 0 2px; } figcaption{ font-size:12px; color:var(--soft); text-align:center; margin-top:6px;
+    font-family:"Space Mono",monospace; }
+  svg{ width:100%; height:auto; display:block; background:#fff; border:1px solid var(--line); border-radius:12px; }
+  .svgtext{ font-family:"Space Mono",monospace; }
+  table{ width:100%; border-collapse:collapse; margin-top:8px; font-size:13.5px; }
+  th,td{ border:1px solid var(--line); padding:7px 9px; text-align:left; vertical-align:top; }
+  th{ background:var(--amber-wash); font-family:"Space Mono",monospace; font-size:11px;
+    letter-spacing:.04em; text-transform:uppercase; color:var(--amber-deep); }
+  ul{ margin:6px 0; padding-left:20px; } li{ margin:4px 0; font-size:13.5px; }
+  code{ font-family:"Space Mono",monospace; background:var(--amber-wash); padding:1px 5px;
+    border-radius:5px; font-size:12.5px; color:var(--amber-deep); }
+  .two{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media(max-width:680px){ .two{ grid-template-columns:1fr; } }
+  @page{ size:A4 portrait; margin:9mm; }
+  @media print{ body{ background:#fff; padding:0; } .card,header{ box-shadow:none; break-inside:avoid; } svg{ border-color:#ccc; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="k">maquete ENIAC · mecânica</div>
+    <h1>Como o motor puxa e “cospe” a fita de papel perfurado</h1>
+    <p>NEMA 17 + A4988 · rolete de tração + rolete de pressão (pinch roller)</p>
+  </header>
+
+  <!-- ================= VISTA DE LADO ================= -->
+  <div class="card">
+    <h2><span class="n">A</span>Vista de lado — como a fita anda</h2>
+    <p class="soft">A fita sai da bobina, passa <strong>espremida</strong> entre o rolete do motor (tração) e o rolete de pressão, e é empurrada pra fora pela fenda. O motor gira → a fita avança.</p>
+    <figure>
+      <svg viewBox="0 0 900 470" role="img" aria-label="Vista de lado do mecanismo: a bobina de papel à esquerda, a fita passando entre um rolete de tração no eixo do motor NEMA 17 e um rolete de pressão com mola, e saindo perfurada por uma fenda à direita.">
+        <!-- base -->
+        <rect x="40" y="410" width="820" height="14" rx="3" fill="#d9cbb3"/>
+        <rect x="40" y="410" width="820" height="4" rx="2" fill="#cdbd9f"/>
+        <text x="850" y="440" text-anchor="end" font-size="11" fill="#9a8a6c" class="svgtext">base / chassi</text>
+
+        <!-- bobina (supply reel) -->
+        <g>
+          <rect x="150" y="250" width="12" height="160" fill="#b9c2cc"/><!-- poste eixo -->
+          <circle cx="156" cy="170" r="64" fill="#f3ead8" stroke="#caa96f" stroke-width="2"/>
+          <circle cx="156" cy="170" r="48" fill="none" stroke="#e0cfa8" stroke-width="1.5"/>
+          <circle cx="156" cy="170" r="33" fill="none" stroke="#e0cfa8" stroke-width="1.5"/>
+          <circle cx="156" cy="170" r="9" fill="#7b8794"/>
+          <text x="156" y="100" text-anchor="middle" font-size="11.5" fill="#6a5a3e" class="svgtext">bobina de papel</text>
+          <text x="156" y="88" text-anchor="middle" font-size="10" fill="#9a8a6c" class="svgtext">(atrito leve)</text>
+        </g>
+
+        <!-- TAPE path: reel -> nip -> exit slot -> drooping out -->
+        <path d="M212 198 C 300 250, 320 300, 470 300 L 648 300 C 690 300, 700 330, 700 410"
+              fill="none" stroke="#e3d4ad" stroke-width="12" stroke-linecap="round"/>
+        <path d="M212 198 C 300 250, 320 300, 470 300 L 648 300 C 690 300, 700 330, 700 410"
+              fill="none" stroke="#efe6d4" stroke-width="7" stroke-linecap="round"/>
+        <!-- furos na parte que saiu -->
+        <g fill="#b7a271">
+          <circle cx="672" cy="334" r="3.2"/><circle cx="687" cy="356" r="3.2"/>
+          <circle cx="696" cy="380" r="3.2"/><circle cx="700" cy="403" r="3.2"/>
+          <circle cx="683" cy="345" r="2"/><circle cx="693" cy="368" r="2"/>
+        </g>
+
+        <!-- MOTOR NEMA17 + bracket em L -->
+        <g>
+          <!-- bracket em L -->
+          <rect x="300" y="300" width="12" height="110" fill="#9aa6b2"/>
+          <rect x="300" y="398" width="70" height="12" fill="#9aa6b2"/>
+          <!-- corpo do motor -->
+          <rect x="312" y="256" width="92" height="92" rx="8" fill="#4b5560"/>
+          <rect x="324" y="268" width="68" height="68" rx="6" fill="none" stroke="#6b7682" stroke-width="2"/>
+          <circle cx="358" cy="302" r="9" fill="#6b7682"/>
+          <text x="358" y="306" text-anchor="middle" font-size="9" fill="#cdd5dd" class="svgtext">NEMA</text>
+          <!-- eixo até o rolete -->
+          <rect x="404" y="297" width="56" height="8" rx="3" fill="#8b96a2"/>
+        </g>
+
+        <!-- ROLETE DE TRAÇÃO (no eixo do motor) -->
+        <g>
+          <circle cx="470" cy="301" r="44" fill="#3a3630"/>
+          <circle cx="470" cy="301" r="44" fill="none" stroke="#8b96a2" stroke-width="3"/>
+          <circle cx="470" cy="301" r="30" fill="none" stroke="#5a5750" stroke-width="2"/>
+          <circle cx="470" cy="301" r="6" fill="#8b96a2"/>
+        </g>
+
+        <!-- ROLETE DE PRESSÃO (livre) + mola -->
+        <g>
+          <circle cx="470" cy="245" r="24" fill="#5a5f66"/>
+          <circle cx="470" cy="245" r="24" fill="none" stroke="#8b96a2" stroke-width="2.5"/>
+          <circle cx="470" cy="245" r="5" fill="#cdd5dd"/>
+          <!-- braço pivotado -->
+          <rect x="470" y="241" width="150" height="8" rx="4" fill="#9aa6b2"/>
+          <circle cx="618" cy="245" r="7" fill="#6b7682"/><!-- pivô -->
+          <text x="628" y="241" font-size="10" fill="#9a8a6c" class="svgtext">pivô</text>
+          <!-- mola empurrando pra baixo -->
+          <path d="M470 150 L470 165 L458 172 L482 180 L458 188 L482 196 L470 203 L470 218"
+                fill="none" stroke="#c9731a" stroke-width="3"/>
+          <rect x="452" y="142" width="36" height="8" rx="3" fill="#b9c2cc"/><!-- ancora -->
+        </g>
+
+        <!-- nip indicator -->
+        <line x1="470" y1="273" x2="470" y2="279" stroke="#c9731a" stroke-width="2"/>
+
+        <!-- parede/fenda de saída -->
+        <g>
+          <rect x="648" y="150" width="12" height="146" rx="2" fill="#cdbd9f"/>
+          <rect x="648" y="318" width="12" height="92" rx="2" fill="#cdbd9f"/>
+          <text x="666" y="296" font-size="10.5" fill="#9a8a6c" class="svgtext">fenda de saída</text>
+        </g>
+
+        <!-- seta de fluxo -->
+        <path d="M700 420 l0 20 M694 434 l6 8 l6 -8" fill="none" stroke="#c9731a" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="716" y="445" font-size="11" fill="#c9731a" class="svgtext">fita sai</text>
+
+        <!-- rótulos com linhas-guia -->
+        <g font-size="11.5" fill="#2a2016" class="svgtext">
+          <text x="548" y="330">rolete de tração</text>
+          <text x="548" y="344" font-size="9.5" fill="#9a8a6c">(eixo do NEMA 17)</text>
+          <line x1="512" y1="320" x2="544" y2="326" stroke="#caa96f" stroke-width="1"/>
+
+          <text x="500" y="150" font-size="11.5">rolete de pressão</text>
+          <text x="500" y="164" font-size="9.5" fill="#9a8a6c">(livre, empurrado pela mola)</text>
+          <line x1="486" y1="226" x2="500" y2="158" stroke="#caa96f" stroke-width="1"/>
+
+          <text x="372" y="150" text-anchor="end" font-size="11.5" fill="#c9731a">mola / elástico</text>
+          <line x1="462" y1="175" x2="376" y2="146" stroke="#caa96f" stroke-width="1"/>
+
+          <text x="250" y="382">suporte em L do motor</text>
+          <line x1="306" y1="370" x2="306" y2="376" stroke="#caa96f" stroke-width="1"/>
+
+          <text x="300" y="300" text-anchor="end" font-size="10.5" fill="#9a8a6c">papel espremido ↘</text>
+        </g>
+      </svg>
+      <figcaption>fluxo: bobina → entre os roletes (ponto de aperto) → fenda → sai “cuspida”</figcaption>
+    </figure>
+  </div>
+
+  <div class="two">
+    <!-- VISTA DE FRENTE -->
+    <div class="card">
+      <h2><span class="n">B</span>Vista de frente — guias</h2>
+      <p class="soft">Duas paredinhas laterais mantêm a fita alinhada (largura da fita + folga pequena).</p>
+      <figure>
+        <svg viewBox="0 0 360 230" role="img" aria-label="Vista de frente: o rolete entre duas guias laterais, com a fita no meio.">
+          <rect x="20" y="150" width="320" height="12" rx="3" fill="#d9cbb3"/><!-- base -->
+          <!-- guias -->
+          <rect x="96" y="60" width="12" height="96" rx="2" fill="#9aa6b2"/>
+          <rect x="252" y="60" width="12" height="96" rx="2" fill="#9aa6b2"/>
+          <text x="90" y="52" text-anchor="middle" font-size="10" fill="#9a8a6c" class="svgtext">guia</text>
+          <text x="270" y="52" text-anchor="middle" font-size="10" fill="#9a8a6c" class="svgtext">guia</text>
+          <!-- rolete (cilindro) -->
+          <rect x="108" y="96" width="144" height="34" rx="6" fill="#3a3630"/>
+          <ellipse cx="108" cy="113" rx="7" ry="17" fill="#5a5750"/>
+          <ellipse cx="252" cy="113" rx="7" ry="17" fill="#8b96a2"/>
+          <!-- fita no meio -->
+          <rect x="140" y="100" width="80" height="26" rx="2" fill="#efe6d4" stroke="#caa96f"/>
+          <g fill="#b7a271"><circle cx="156" cy="113" r="3"/><circle cx="180" cy="113" r="3"/><circle cx="204" cy="113" r="3"/></g>
+          <text x="180" y="150" text-anchor="middle" font-size="10.5" fill="#2a2016" class="svgtext">fita no meio</text>
+          <path d="M140 92 L220 92" stroke="#caa96f" stroke-width="1"/>
+          <text x="180" y="86" text-anchor="middle" font-size="10" fill="#9a8a6c" class="svgtext">largura da fita + folga</text>
+        </svg>
+        <figcaption>as guias impedem a fita de “serpentear”</figcaption>
+      </figure>
+    </div>
+
+    <!-- SPROCKET -->
+    <div class="card">
+      <h2><span class="n">C</span>Alternativa — roda dentada</h2>
+      <p class="soft">Mais autêntica (como leitores reais): pinos entram em furos de arraste e puxam a fita. Exige furos com espaçamento constante e uma roda no mesmo passo.</p>
+      <figure>
+        <svg viewBox="0 0 360 230" role="img" aria-label="Alternativa com roda dentada: pinos entram nos furos de arraste da fita.">
+          <!-- fita -->
+          <rect x="20" y="150" width="320" height="30" rx="3" fill="#efe6d4" stroke="#caa96f"/>
+          <g fill="#b7a271">
+            <circle cx="60" cy="165" r="4.5"/><circle cx="110" cy="165" r="4.5"/><circle cx="160" cy="165" r="4.5"/>
+            <circle cx="210" cy="165" r="4.5"/><circle cx="260" cy="165" r="4.5"/><circle cx="310" cy="165" r="4.5"/>
+          </g>
+          <!-- roda dentada -->
+          <circle cx="160" cy="92" r="52" fill="#4b5560"/>
+          <circle cx="160" cy="92" r="52" fill="none" stroke="#8b96a2" stroke-width="3"/>
+          <circle cx="160" cy="92" r="8" fill="#8b96a2"/>
+          <g fill="#c9731a">
+            <circle cx="160" cy="146" r="4"/><circle cx="110" cy="128" r="3"/><circle cx="210" cy="128" r="3"/>
+            <circle cx="92" cy="92" r="3"/><circle cx="228" cy="92" r="3"/>
+          </g>
+          <text x="160" y="40" text-anchor="middle" font-size="11" fill="#2a2016" class="svgtext">roda com pinos</text>
+          <text x="300" y="200" text-anchor="end" font-size="10.5" fill="#9a8a6c" class="svgtext">furos de arraste</text>
+        </svg>
+        <figcaption>opcional: pode ser só decorativo, com tração pela Opção A</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- PEÇAS -->
+  <div class="card">
+    <h2><span class="n">D</span>Peças sugeridas</h2>
+    <table>
+      <tr><th>Peça</th><th>Sugestão</th></tr>
+      <tr><td>Motor + driver</td><td><strong>NEMA 17</strong> + <strong>A4988</strong> (o “motor forte” reaproveitado)</td></tr>
+      <tr><td>Suporte do motor</td><td><strong>Bracket em “L” para NEMA 17</strong> (pronto, barato), parafusado na base</td></tr>
+      <tr><td>Rolete de tração</td><td>Rolete 3D com furo <strong>5 mm</strong> + parafuso de aperto; ou polia <strong>GT2</strong> com <strong>O-ring/borracha</strong> por cima</td></tr>
+      <tr><td>Rolete de pressão</td><td>Rolamento <strong>608/625</strong> livre, ou outro rolete girando solto</td></tr>
+      <tr><td>Mola de pressão</td><td>Mola pequena, <strong>elástico</strong> ou espuma, empurrando o rolete de pressão</td></tr>
+      <tr><td>Guias + fenda</td><td>Paredinhas (acrílico/MDF/3D) na largura da fita; rasgo de saída de ~2 mm</td></tr>
+      <tr><td>Bobina</td><td>Rolo de <strong>papel de calculadora (~57 mm)</strong> num eixo com atrito leve</td></tr>
+    </table>
+  </div>
+
+  <!-- AJUSTES -->
+  <div class="card">
+    <h2><span class="n">E</span>Ajustes que fazem funcionar</h2>
+    <ul>
+      <li><strong>Pouca força basta:</strong> papel quase não exige torque. Deixe o <strong>Vref do A4988 BEM baixo</strong> → motor frio e silencioso.</li>
+      <li><strong>Microstep 1/8 ou 1/16</strong> (pinos MS1/MS2/MS3) → avanço suave e sem “rateio”.</li>
+      <li><strong>Aderência:</strong> se patinar, aumente a pressão da mola ou melhore a borracha do rolete (O-ring, fita emborrachada, até uma <strong>borracha de apagar</strong> vira rolete).</li>
+      <li><strong>Quanto anda por passo:</strong> <code>mm/volta = π × Ø do rolete</code>. Ex.: rolete de <strong>20 mm</strong> → ~62,8 mm/volta; com 200 passos/volta, <strong>~0,31 mm por passo cheio</strong>. Rolete maior = fita mais rápida.</li>
+      <li><strong>Energia:</strong> +5 V da fita de LED separado do 12 V do motor; <strong>só o GND é comum</strong>; capacitor 470 µF entre VMOT e GND do A4988.</li>
+    </ul>
+  </div>
+</div>

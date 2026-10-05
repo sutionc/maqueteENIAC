@@ -16,6 +16,7 @@ firmware/
     secrets.h.example         → modelo de Wi-Fi (copie p/ secrets.h)
 docs/
   mecanica-fita-perfurada.md  → como montar o motor/suportes p/ puxar a fita
+  mecanica-fita-perfurada.html → o mesmo, com desenho (abra no navegador)
 CLAUDE.md                     → contexto + todo o conhecimento do projeto
 ```
 
