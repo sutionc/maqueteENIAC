@@ -1,0 +1,8 @@
+# Wi-Fi / segredos — nunca vão pro repositório
+secrets.h
+
+# Build / sistema
+build/
+*.bin
+*.elf
+.DS_Store
